@@ -1,7 +1,6 @@
 package com.alkemychallengev2.disney.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -13,6 +12,9 @@ import java.util.Set;
 @Table(name = "personajes")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @SQLDelete(sql = "UPDATE personajes SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
 public class PersonajeEntity {
@@ -27,7 +29,7 @@ public class PersonajeEntity {
 
     private Integer edad;
 
-    private Integer peso;
+    private Double peso;
 
     @Column(length = 1024)
     private String historia;

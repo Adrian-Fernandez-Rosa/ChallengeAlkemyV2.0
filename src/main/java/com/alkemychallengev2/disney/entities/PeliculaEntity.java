@@ -1,7 +1,6 @@
 package com.alkemychallengev2.disney.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +16,9 @@ import java.util.Set;
 @Setter
 @SQLDelete(sql = "UPDATE peliculas SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PeliculaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,12 +45,20 @@ public class PeliculaEntity {
     )
     private Set<PersonajeEntity> personajes = new HashSet<>();
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "genero_id", insertable = false, updatable = false)
+    @ManyToOne
     private GeneroEntity genero;
     //generos
 
     @Column(name = "genero_id", nullable = false)
     private Long generoId;
     //genero id
+
+     public void addPersonaje(PersonajeEntity personaje){
+         this.personajes.add(personaje);
+     }
+
+     public void removePersonaje(PersonajeEntity personaje){
+         this.personajes.remove(personaje);
+     }
+
 }
