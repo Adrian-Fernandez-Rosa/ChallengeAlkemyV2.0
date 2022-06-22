@@ -1,14 +1,14 @@
-package com.alkemychallengev2.disney.dto.response;
+package com.alkemychallengev2.disney.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PersonajeResponseSmall {
+public class PersonajeBasicDTO {
 
+    private Long id;
     private String imagen;
-
     private String nombre;
 
 }
